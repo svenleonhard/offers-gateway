@@ -1,0 +1,31 @@
+{
+  "offersGatewayApp": {
+    "aldiApiOffer": {
+      "home": {
+        "title": "Offers",
+        "createLabel": "Offer erstellen",
+        "createOrEditLabel": "Offer erstellen oder bearbeiten",
+        "search": "Suche nach Offer",
+        "notFound": "No Offers found"
+      },
+      "delete": {
+        "question": "Soll Offer {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Offer"
+      },
+      "advantage": "Advantage",
+      "amount": "Amount",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "article": "Article"
+    }
+  },
+  "aldiApiApp": {
+    "aldiApiOffer": {
+      "created": "Offer erstellt mit ID {{ param }}",
+      "updated": "Offer aktualisiert mit ID {{ param }}",
+      "deleted": "Offer gelöscht mit ID {{ param }}"
+    }
+  }
+}

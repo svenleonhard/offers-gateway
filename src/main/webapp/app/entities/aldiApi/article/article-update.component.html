@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-article-heading" jhiTranslate="offersGatewayApp.aldiApiArticle.home.createOrEditLabel">Create or edit a Article</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="offersGatewayApp.aldiApiArticle.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                    <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('description')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="offersGatewayApp.aldiApiArticle.producer" for="field_producer">Producer</label>
+                    <input type="text" class="form-control" name="producer" id="field_producer"
+                           formControlName="producer"/>
+                    <div *ngIf="editForm.get('producer')!.invalid && (editForm.get('producer')!.dirty || editForm.get('producer')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('producer')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="offersGatewayApp.aldiApiArticle.amount" for="field_amount">Amount</label>
+                    <input type="text" class="form-control" name="amount" id="field_amount"
+                           formControlName="amount"/>
+                    <div *ngIf="editForm.get('amount')!.invalid && (editForm.get('amount')!.dirty || editForm.get('amount')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('amount')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="offersGatewayApp.aldiApiArticle.category" for="field_category">Category</label>
+                    <select class="form-control" name="category" formControlName="category" id="field_category">
+                        <option value="ELECTRONIC">{{ 'offersGatewayApp.ArticleCategory.ELECTRONIC' | translate }}</option>
+                        <option value="EXTRAORDINARY">{{ 'offersGatewayApp.ArticleCategory.EXTRAORDINARY' | translate }}</option>
+                        <option value="DRUGSTORE">{{ 'offersGatewayApp.ArticleCategory.DRUGSTORE' | translate }}</option>
+                        <option value="FRESH">{{ 'offersGatewayApp.ArticleCategory.FRESH' | translate }}</option>
+                        <option value="BAKERY">{{ 'offersGatewayApp.ArticleCategory.BAKERY' | translate }}</option>
+                        <option value="MEAT">{{ 'offersGatewayApp.ArticleCategory.MEAT' | translate }}</option>
+                        <option value="MILKPRODUCTS">{{ 'offersGatewayApp.ArticleCategory.MILKPRODUCTS' | translate }}</option>
+                        <option value="BEVERAGE">{{ 'offersGatewayApp.ArticleCategory.BEVERAGE' | translate }}</option>
+                        <option value="SWEETS">{{ 'offersGatewayApp.ArticleCategory.SWEETS' | translate }}</option>
+                        <option value="CAN">{{ 'offersGatewayApp.ArticleCategory.CAN' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="offersGatewayApp.aldiApiArticle.price" for="field_price">Price</label>
+                    <input type="number" class="form-control" name="price" id="field_price"
+                           formControlName="price"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="offersGatewayApp.aldiApiArticle.picture" for="field_picture">Picture</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('pictureContentType')!.value + ';base64,' + editForm.get('picture')!.value" style="max-height: 100px;" *ngIf="editForm.get('picture')!.value" alt="article image"/>
+                        <div *ngIf="editForm.get('picture')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('pictureContentType')!.value }}, {{ byteSize(editForm.get('picture')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('picture', 'pictureContentType', 'file_picture')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_picture" (change)="setFileData($event, 'picture', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="picture" id="field_picture"
+                           formControlName="picture"/>
+                    <input type="hidden" class="form-control" name="pictureContentType" id="field_pictureContentType"
+                           formControlName="pictureContentType" />
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

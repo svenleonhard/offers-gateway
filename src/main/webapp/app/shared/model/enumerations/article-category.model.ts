@@ -1,0 +1,21 @@
+export const enum ArticleCategory {
+  ELECTRONIC = 'ELECTRONIC',
+
+  EXTRAORDINARY = 'EXTRAORDINARY',
+
+  DRUGSTORE = 'DRUGSTORE',
+
+  FRESH = 'FRESH',
+
+  BAKERY = 'BAKERY',
+
+  MEAT = 'MEAT',
+
+  MILKPRODUCTS = 'MILKPRODUCTS',
+
+  BEVERAGE = 'BEVERAGE',
+
+  SWEETS = 'SWEETS',
+
+  CAN = 'CAN',
+}

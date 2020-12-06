@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="article">
+            <h2><span jhiTranslate="offersGatewayApp.aldiApiArticle.detail.title">Article</span> {{ article.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="offersGatewayApp.aldiApiArticle.description">Description</span></dt>
+                <dd>
+                    <span>{{ article.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="offersGatewayApp.aldiApiArticle.producer">Producer</span></dt>
+                <dd>
+                    <span>{{ article.producer }}</span>
+                </dd>
+                <dt><span jhiTranslate="offersGatewayApp.aldiApiArticle.amount">Amount</span></dt>
+                <dd>
+                    <span>{{ article.amount }}</span>
+                </dd>
+                <dt><span jhiTranslate="offersGatewayApp.aldiApiArticle.category">Category</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'offersGatewayApp.ArticleCategory.' + article.category }}">{{ article.category }}</span>
+                </dd>
+                <dt><span jhiTranslate="offersGatewayApp.aldiApiArticle.price">Price</span></dt>
+                <dd>
+                    <span>{{ article.price }}</span>
+                </dd>
+                <dt><span jhiTranslate="offersGatewayApp.aldiApiArticle.picture">Picture</span></dt>
+                <dd>
+                    <div *ngIf="article.picture">
+                        <a (click)="openFile(article.pictureContentType, article.picture)">
+                            <img [src]="'data:' + article.pictureContentType + ';base64,' + article.picture" style="max-width: 100%;" alt="article image"/>
+                        </a>
+                        {{ article.pictureContentType }}, {{ byteSize(article.picture) }}
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/article', article.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="offer">
+            <h2><span jhiTranslate="offersGatewayApp.aldiApiOffer.detail.title">Offer</span> {{ offer.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="offersGatewayApp.aldiApiOffer.advantage">Advantage</span></dt>
+                <dd>
+                    <span>{{ offer.advantage }}</span>
+                </dd>
+                <dt><span jhiTranslate="offersGatewayApp.aldiApiOffer.amount">Amount</span></dt>
+                <dd>
+                    <span>{{ offer.amount }}</span>
+                </dd>
+                <dt><span jhiTranslate="offersGatewayApp.aldiApiOffer.startDate">Start Date</span></dt>
+                <dd>
+                    <span>{{ offer.startDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="offersGatewayApp.aldiApiOffer.endDate">End Date</span></dt>
+                <dd>
+                    <span>{{ offer.endDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="offersGatewayApp.aldiApiOffer.article">Article</span></dt>
+                <dd>
+                    <div *ngIf="offer.article">
+                        <a [routerLink]="['/article', offer.article?.id, 'view']">{{ offer.article?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/offer', offer.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
